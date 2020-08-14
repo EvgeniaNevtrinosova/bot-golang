@@ -16,6 +16,7 @@ import (
 const (
 	defaultAPIURL = "https://api.icq.net/bot/v1"
 	defaultDebug  = false
+	defaultPollTime = 0
 )
 
 // Bot is the main structure for interaction with API.
@@ -236,13 +237,15 @@ func NewBot(token string, opts ...BotOption) (*Bot, error) {
 		TimestampFormat: "2006-01-02 15:04:05",
 	})
 
-	apiURL, debug := defaultAPIURL, defaultDebug
+	apiURL, debug, pollTime := defaultAPIURL, defaultDebug, defaultPollTime
 	for _, option := range opts {
 		switch option.Type() {
 		case "api_url":
 			apiURL = option.Value().(string)
 		case "debug":
 			debug = option.Value().(bool)
+		case "pollTime":
+			pollTime = option.Value().(int)
 		}
 	}
 
@@ -251,7 +254,7 @@ func NewBot(token string, opts ...BotOption) (*Bot, error) {
 	}
 
 	client := NewClient(apiURL, token, logger)
-	updater := NewUpdater(client, 0, logger)
+	updater := NewUpdater(client, pollTime, logger)
 
 	info, err := client.GetInfo()
 	if err != nil {
