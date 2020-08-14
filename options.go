@@ -24,3 +24,13 @@ func (o BotDebug) Type() string {
 func (o BotDebug) Value() interface{} {
 	return bool(o)
 }
+
+type BotPollTime int
+
+func (o BotPollTime) Type() string {
+	return "pollTime"
+}
+
+func (o BotPollTime) Value() interface{} {
+	return int(o)
+}
