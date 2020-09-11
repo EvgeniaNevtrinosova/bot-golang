@@ -227,6 +227,10 @@ func (b *Bot) GetUpdatesChannel(ctx context.Context) <-chan Event {
 	return updates
 }
 
+func (b* Bot) GetEvents(lastEventID int, pollTime int) ([]*Event, error) {
+	return b.client.GetEvents(lastEventID, pollTime)
+}
+
 // NewBot returns new bot object.
 // All communications with bot API must go through Bot struct.
 // In general you don't need to configure this bot, therefore all options are optional arguments.
