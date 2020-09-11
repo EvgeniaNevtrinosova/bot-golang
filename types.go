@@ -135,6 +135,7 @@ func (ep *EventPayload) Message() *Message {
 		Text:      ep.Text,
 		Chat:      ep.Chat,
 		Timestamp: ep.Timestamp,
+		From:      ep.From,
 	}
 }
 

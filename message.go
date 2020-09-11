@@ -25,6 +25,8 @@ type Message struct {
 	// Id of the message (for editing)
 	ID string `json:"msgId"`
 
+	From Contact `json:"from"`
+
 	// File contains file attachment of the message
 	File *os.File `json:"-"`
 
